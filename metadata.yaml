@@ -3,3 +3,5 @@ documentation: "https://integration.mediabids.com"
 versions:
   - sha: 990f5bc076f8745a2f2de764e5316d9db8886fca
     changeNotes: Initial release.
+  - sha: 2f3f16edcd761b0449f9544445328d6bbd8e72fe
+    changeNotes: Added categories ATTRIBITION and SALES.
