@@ -14,7 +14,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Mediabids Conversion",
-  "categories": ["AFFILIATE_MARKETING" , "ADVERTISING", "CONVERSIONS", "LEAD_GENERATION", "MARKETING"],
+  "categories": ["AFFILIATE_MARKETING" , "ADVERTISING", "ATTRIBUTION", "CONVERSIONS", "LEAD_GENERATION", "MARKETING", "SALES"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
