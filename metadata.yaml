@@ -5,3 +5,5 @@ versions:
     changeNotes: Initial release.
   - sha: 2f3f16edcd761b0449f9544445328d6bbd8e72fe
     changeNotes: Added categories ATTRIBITION and SALES.
+  - sha: 6a321e6981c534d0f7405eb4ead5bf9df75bc017
+    changeNotes: Changes 'let' keyword to 'var'.
