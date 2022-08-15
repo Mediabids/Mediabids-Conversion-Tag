@@ -51,14 +51,14 @@ const sendPixel = require('sendPixel');
 const getTimestamp = require('getTimestamp');
 const encodeUriComponent = require('encodeUriComponent');
 const getCookieValues = require('getCookieValues');  
-const mbv='1.0';
+const mbv='1.1.8.15.220';
 
-let mb_campaign = getCookieValues('mb_campaign');
-let mb_source = getCookieValues('mb_source');
-let mb_tx_id = getCookieValues('mb_tx_id');
+var mb_campaign = getCookieValues('mb_campaign');
+var mb_source = getCookieValues('mb_source');
+var mb_tx_id = getCookieValues('mb_tx_id');
 
 if (mb_campaign){
-  let url = 'https://mblink.it/post-back/cpa';
+  var url = 'https://mblink.it/post-back/cpa';
   url += '?mb_campaign=' + encodeUriComponent(mb_campaign); 
   url += '&mb_tx_id=' + encodeUriComponent(mb_tx_id); 
   if(mb_source){
