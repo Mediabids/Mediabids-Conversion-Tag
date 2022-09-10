@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Mediabids Conversion",
-  "categories": ["AFFILIATE_MARKETING" , "ADVERTISING", "ATTRIBUTION", "CONVERSIONS", "LEAD_GENERATION", "MARKETING", "SALES"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -34,13 +33,25 @@ ___TEMPLATE_PARAMETERS___
     "type": "TEXT",
     "name": "mb_amt_tot",
     "displayName": "Total Amount",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "canBeEmptyString": true,
+    "help": "Enter an optional total sale amount here."
   },
   {
     "type": "TEXT",
     "name": "mb_amt_com",
     "displayName": "Commission Amount",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "canBeEmptyString": true,
+    "help": "Enter an optional total sale commission amount here."
+  },
+  {
+    "type": "TEXT",
+    "name": "reference_id",
+    "displayName": "Client Reference Id",
+    "simpleValueType": true,
+    "canBeEmptyString": true,
+    "help": "Enter an optional reference id here."
   }
 ]
 
@@ -51,20 +62,24 @@ const sendPixel = require('sendPixel');
 const getTimestamp = require('getTimestamp');
 const encodeUriComponent = require('encodeUriComponent');
 const getCookieValues = require('getCookieValues');  
-const mbv='1.1.8.15.220';
+var mbv='1.2';
 
 var mb_campaign = getCookieValues('mb_campaign');
 var mb_source = getCookieValues('mb_source');
 var mb_tx_id = getCookieValues('mb_tx_id');
+const mb_amt_tot = data.mb_amt_tot;
+const mb_amt_com = data.mb_amt_com;
+const reference_id = data.reference_id; 
 
 if (mb_campaign){
   var url = 'https://mblink.it/post-back/cpa';
-  url += '?mb_campaign=' + encodeUriComponent(mb_campaign); 
-  url += '&mb_tx_id=' + encodeUriComponent(mb_tx_id); 
-  if(mb_source){
-      url += '&mb_source=' + encodeUriComponent(mb_source); 
-  } 
-  url += '&mb_ver='+mbv;  
+  url += '?mb_campaign=' + mb_campaign; 
+  url += '&mb_tx_id=' + mb_tx_id; 
+  if(mb_source){url += '&mb_source=' + encodeUriComponent(mb_source); } 
+  if(mb_amt_tot)url += '&mb_amt_tot=' + encodeUriComponent(mb_amt_tot); 
+  if(mb_amt_com) url += '&mb_amt_com=' + encodeUriComponent(mb_amt_com); 
+  if(reference_id) url += '&reference_id=' + encodeUriComponent(reference_id); 
+  url += '&mb_ver='+mbv;   
   sendPixel(url,data.gtmOnSuccess,data.gtmOnFailure);
 }
 
@@ -155,20 +170,39 @@ scenarios:
 - name: Success Test
   code: |2
 
-    const mockData = {};
+    const mockData = {
+    mb_campaign: '',
+    mb_source : 'test',
+    mb_tx_id : '111',
+    mb_amt_tot : '',
+    mb_amt_com : '',
+    reference_id : ''
+    };
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    //assertApi('gtmOnSuccess').wasCalled();
+- name: Failure Test
+  code: " const mockData = {};\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
+    \n// Verify that the tag finished successfully. \nassertApi('gtmOnFailure').wasCalled();"
+- name: Untitled test 3
+  code: |-
+    const mockData = {
+      // Mocked field values
+    };
 
     // Call runCode to run the template's code.
     runCode(mockData);
 
     // Verify that the tag finished successfully.
     assertApi('gtmOnSuccess').wasCalled();
-- name: Failure Test
-  code: " const mockData = {};\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
-    \n// Verify that the tag finished successfully. \nassertApi('gtmOnFailure').wasCalled();"
 
 
 ___NOTES___
 
-Created on 4/15/2022, 10:55:41 AM
+Created on 9/9/2022, 11:42:16 PM
+
 
 
