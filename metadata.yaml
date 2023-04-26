@@ -1,6 +1,8 @@
 homepage: "https://www.mediabids.com"
 documentation: "https://integration.mediabids.com"
 versions:
+  - sha: 2eb95386168d09f3f1c734aaa30620469dfd4424
+    changeNotes: Modified end point.
   - sha: c1ddc222594fc31914ac4b496f8d346a835c1ddb
     changeNotes: Changes 'let' keyword to 'var'.
   - sha: 6a321e6981c534d0f7405eb4ead5bf9df75bc017
