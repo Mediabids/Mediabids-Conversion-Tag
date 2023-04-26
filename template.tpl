@@ -62,7 +62,7 @@ const sendPixel = require('sendPixel');
 const getTimestamp = require('getTimestamp');
 const encodeUriComponent = require('encodeUriComponent');
 const getCookieValues = require('getCookieValues');  
-var mbv='1.2';
+var mbv='1.3';
 
 var mb_campaign = getCookieValues('mb_campaign');
 var mb_source = getCookieValues('mb_source');
@@ -72,13 +72,13 @@ const mb_amt_com = data.mb_amt_com;
 const reference_id = data.reference_id; 
 
 if (mb_campaign){
-  var url = 'https://mblink.it/post-back/cpa';
+  var url = 'https://mblink.it/post-back/conversion';
   url += '?mb_campaign=' + mb_campaign; 
   url += '&mb_tx_id=' + mb_tx_id; 
-  if(mb_source){url += '&mb_source=' + encodeUriComponent(mb_source); } 
-  if(mb_amt_tot)url += '&mb_amt_tot=' + encodeUriComponent(mb_amt_tot); 
-  if(mb_amt_com) url += '&mb_amt_com=' + encodeUriComponent(mb_amt_com); 
-  if(reference_id) url += '&reference_id=' + encodeUriComponent(reference_id); 
+  if(typeof mb_source !== 'undefined' ){url += '&mb_source=' + encodeUriComponent(mb_source); } 
+  if(typeof mb_amt_tot !== 'undefined' )url += '&mb_amt_tot=' + encodeUriComponent(mb_amt_tot); 
+  if(typeof mb_amt_com !== 'undefined' ) url += '&mb_amt_com=' + encodeUriComponent(mb_amt_com); 
+  if(typeof reference_id !== 'undefined') url += '&reference_id=' + encodeUriComponent(reference_id);  
   url += '&mb_ver='+mbv;   
   sendPixel(url,data.gtmOnSuccess,data.gtmOnFailure);
 }
